@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CobrançaAI — Recuperamos seu dinheiro atrasado</title>
+    <title>CobrançaAI — Recuperação de Valores sem Custo Fixo</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -20,38 +20,41 @@
         .nav-links a:hover { color: #fff; }
         .hero { padding: 80px 0 60px; text-align: center; }
         .badge { display: inline-block; background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 8px 20px; border-radius: 50px; font-size: 0.9em; margin-bottom: 30px; }
-        h1 { font-size: 3.5em; line-height: 1.1; margin-bottom: 20px; background: linear-gradient(90deg, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .subtitle { font-size: 1.3em; color: #94a3b8; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .cta-box { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 40px; max-width: 500px; margin: 0 auto 60px; border: 1px solid rgba(255,255,255,0.1); }
-        .cta-box h3 { font-size: 1.5em; margin-bottom: 10px; }
-        .cta-box p { color: #94a3b8; margin-bottom: 25px; }
-        input[type="email"] { width: 100%; padding: 15px 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: #fff; font-size: 1em; margin-bottom: 15px; }
-        input[type="email"]::placeholder { color: #64748b; }
-        button { width: 100%; padding: 15px; border-radius: 10px; border: none; background: linear-gradient(90deg, #10b981, #3b82f6); color: #fff; font-size: 1.1em; font-weight: bold; cursor: pointer; transition: transform 0.2s, opacity 0.2s; }
-        button:hover { transform: translateY(-2px); opacity: 0.9; }
-        .note { font-size: 0.85em; color: #64748b; margin-top: 15px; }
-        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.1); }
+        h1 { font-size: 3em; line-height: 1.25; margin-bottom: 20px; background: linear-gradient(90deg, #fff, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; max-width: 900px; margin-left: auto; margin-right: auto; }
+        .subtitle { font-size: 1.25em; color: #94a3b8; margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+        .cta-box { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 40px; max-width: 550px; margin: 0 auto 60px; border: 1px solid rgba(255,255,255,0.1); text-align: left; }
+        .cta-box h3 { font-size: 1.4em; margin-bottom: 8px; color: #fff; }
+        .cta-box p { color: #94a3b8; margin-bottom: 25px; font-size: 0.95em; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 0.85em; color: #cbd5e1; margin-bottom: 6px; }
+        input[type="text"], input[type="email"], select { width: 100%; padding: 14px 18px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); color: #fff; font-size: 0.95em; }
+        input::placeholder { color: #64748b; }
+        select option { background: #1e293b; color: #fff; }
+        button { width: 100%; padding: 16px; border-radius: 10px; border: none; background: linear-gradient(90deg, #10b981, #2563eb); color: #fff; font-size: 1.05em; font-weight: bold; cursor: pointer; transition: transform 0.2s, opacity 0.2s; margin-top: 10px; }
+        button:hover { transform: translateY(-2px); opacity: 0.95; }
+        .note { font-size: 0.8em; color: #64748b; margin-top: 15px; text-align: center; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; padding: 50px 0; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); }
         .stat { text-align: center; }
-        .stat-number { font-size: 3em; font-weight: bold; background: linear-gradient(90deg, #10b981, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .stat-label { color: #94a3b8; margin-top: 5px; }
-        .features { padding: 60px 0; }
-        .features h2 { text-align: center; font-size: 2.5em; margin-bottom: 50px; }
+        .stat-number { font-size: 2.4em; font-weight: bold; color: #10b981; }
+        .stat-label { color: #94a3b8; margin-top: 5px; font-size: 0.95em; }
+        .features { padding: 70px 0; }
+        .features h2 { text-align: center; font-size: 2.2em; margin-bottom: 50px; }
         .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .feature-card { background: rgba(255,255,255,0.05); border-radius: 15px; padding: 30px; border: 1px solid rgba(255,255,255,0.1); transition: transform 0.3s; }
-        .feature-card:hover { transform: translateY(-5px); }
-        .feature-icon { font-size: 2.5em; margin-bottom: 20px; }
-        .feature-card h3 { font-size: 1.3em; margin-bottom: 10px; }
-        .feature-card p { color: #94a3b8; line-height: 1.6; }
-        .pricing { padding: 60px 0; text-align: center; }
-        .pricing h2 { font-size: 2.5em; margin-bottom: 50px; }
-        .pricing-card { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 40px; max-width: 400px; margin: 0 auto; border: 2px solid #10b981; }
-        .pricing-card h3 { font-size: 1.5em; margin-bottom: 10px; }
-        .price { font-size: 3.5em; font-weight: bold; margin: 20px 0; }
-        .price span { font-size: 0.4em; color: #94a3b8; }
-        .pricing-features { list-style: none; margin: 30px 0; text-align: left; }
-        .pricing-features li { padding: 10px 0; color: #cbd5e1; }
+        .feature-card { background: rgba(255,255,255,0.04); border-radius: 15px; padding: 32px; border: 1px solid rgba(255,255,255,0.08); }
+        .feature-icon { font-size: 2.2em; margin-bottom: 18px; }
+        .feature-card h3 { font-size: 1.25em; margin-bottom: 12px; color: #f1f5f9; }
+        .feature-card p { color: #94a3b8; line-height: 1.6; font-size: 0.95em; }
+        .pricing { padding: 60px 0 80px; text-align: center; }
+        .pricing h2 { font-size: 2.2em; margin-bottom: 15px; }
+        .pricing-subtitle { color: #94a3b8; margin-bottom: 40px; font-size: 1.1em; }
+        .pricing-card { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 45px; max-width: 480px; margin: 0 auto; border: 2px solid #10b981; text-align: left; }
+        .pricing-card h3 { font-size: 1.4em; margin-bottom: 8px; color: #fff; }
+        .price { font-size: 3.2em; font-weight: bold; color: #10b981; margin: 15px 0; }
+        .price span { font-size: 0.35em; color: #94a3b8; font-weight: normal; }
+        .pricing-features { list-style: none; margin: 25px 0 35px; }
+        .pricing-features li { padding: 10px 0; color: #cbd5e1; font-size: 0.95em; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .pricing-features li::before { content: "✓ "; color: #10b981; font-weight: bold; margin-right: 10px; }
-        footer { padding: 40px 0; text-align: center; color: #64748b; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 60px; }
+        footer { padding: 40px 0; text-align: center; color: #64748b; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.9em; }
     </style>
 </head>
 <body>
@@ -61,91 +64,120 @@
                 <div class="logo">CobrançaAI</div>
                 <div class="nav-links">
                     <a href="#features">Como funciona</a>
-                    <a href="#pricing">Preço</a>
-                    <a href="#contact">Contato</a>
-                </nav>
+                    <a href="#piloto">Piloto Gratuito</a>
+                    <a href="#pricing">Modelo Comercial</a>
+                </div>
             </nav>
         </div>
     </header>
+
     <section class="hero">
         <div class="container">
-            <span class="badge">🚀 Primeiro SaaS brasileiro de cobrança por IA</span>
-            <h1>Recupere até 80% do que seus clientes devem</h1>
-            <p class="subtitle">Nosso agente de IA cobra automaticamente por WhatsApp e voz. Você só paga quando recuperamos.</p>
-            <div class="cta-box">
-                <h3>Comece agora — sem risco</h3>
-                <p>Teste grátis por 30 dias. Sem cartão de crédito.</p>
-                <input type="email" placeholder="Seu melhor email">
-                <button onclick="alert('Obrigado! Entraremos em contato em breve.')">Quero recuperar meu dinheiro</button>
-                <p class="note">🔒 Seus dados estão seguros. Não compartilhamos com terceiros.</p>
+            <span class="badge">🛡️ Risco Zero — 100% focado em resultado</span>
+            <h1>Recupere mais do que hoje, sem custo fixo. Você só paga 7% sobre o que entrar de verdade.</h1>
+            <p class="subtitle">Sem mensalidades, sem custos de implantação e sem contrato de fidelidade. Teste a eficácia da nossa régua automatizada em um piloto de 14 dias com 100 títulos da sua empresa.</p>
+
+            <div class="cta-box" id="piloto">
+                <h3>Solicitar Piloto Sem Compromisso</h3>
+                <p>Envie 100 títulos em atraso por planilha. Se não recuperarmos nada, você paga R$ 0.</p>
+                <form onsubmit="event.preventDefault(); alert('Solicitação recebida! Em breve entraremos em contato para estruturar seu piloto de 14 dias.');">
+                    <div class="form-group">
+                        <label>Nome do Responsável</label>
+                        <input type="text" placeholder="Ex: Roberto Silva" required>
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail Corporativo</label>
+                        <input type="email" placeholder="nome@suaempresa.com.br" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Segmento da Empresa</label>
+                        <select required>
+                            <option value="">Selecione o segmento...</option>
+                            <option value="escola">Instituição de Ensino / Escola</option>
+                            <option value="clinica">Saúde / Rede de Clínicas</option>
+                            <option value="saas">SaaS / Empresa de Tecnologia</option>
+                            <option value="distribuidora">Distribuidora / Atacado B2B</option>
+                            <option value="servicos">Prestação de Serviços B2B</option>
+                            <option value="outro">Outro segmento</option>
+                        </select>
+                    </div>
+                    <button type="submit">Solicitar Piloto de 14 Dias</button>
+                </form>
+                <p class="note">🔒 Assinamos NDA e Termo de Tratamento de Dados (LGPD) antes de receber qualquer planilha.</p>
             </div>
         </div>
     </section>
+
     <section class="stats">
         <div class="container">
             <div class="feature-grid">
                 <div class="stat">
-                    <div class="stat-number">80%</div>
-                    <div class="stat-label">Taxa de recuperação</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">24h</div>
-                    <div class="stat-label">Tempo médio de resposta</div>
+                    <div class="stat-number">7%</div>
+                    <div class="stat-label">Taxa única sobre o valor recuperado</div>
                 </div>
                 <div class="stat">
                     <div class="stat-number">R$ 0</div>
-                    <div class="stat-label">Custo fixo mensal</div>
+                    <div class="stat-label">Custo de implantação ou mensalidade</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-number">7%</div>
-                    <div class="stat-label">Sobre valor recuperado</div>
+                    <div class="stat-number">14 dias</div>
+                    <div class="stat-label">Duração do piloto com 100 títulos</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Conforme com CDC e LGPD</div>
                 </div>
             </div>
         </div>
     </section>
+
     <section class="features" id="features">
         <div class="container">
-            <h2>Como funciona</h2>
+            <h2>Por que grandes regionais escolhem a CobrançaAI?</h2>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Conecte suas contas</h3>
-                    <p>Importamos boletos, notas fiscais e extratos do Pix automaticamente. Identificamos quem deve e quanto deve.</p>
+                    <div class="feature-icon">⚖️</div>
+                    <h3>Régua 100% Protegida (CDC/LGPD)</h3>
+                    <p>Trava operacional rígida em código: limite de 1 contato a cada 48h, mensagens estritamente em horário comercial, sem linguagem ostensiva ou constrangimento (CDC Art. 42/71).</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">💬</div>
-                    <h3>Cobrança automática</h3>
-                    <p>Nosso agente envia lembretes educados por WhatsApp e faz ligações de voz. Negocia parcelamento dentro das regras que você definir.</p>
+                    <h3>Negociação Humanizada no WhatsApp</h3>
+                    <p>Agente focado em resolução prática: gera Pix na hora, propõe parcelamentos pré-autorizados pelo credor e responde a dúvidas com tom profissional de equipe financeira.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">✅</div>
-                    <h3>Conciliação inteligente</h3>
-                    <p>Quando o cliente paga, conciliamos automaticamente com sua conta bancária. Atualizamos seu fluxo de caixa em tempo real.</p>
+                    <div class="feature-icon">🔍</div>
+                    <h3>Conciliação e Interrupção Automática</h3>
+                    <p>Identificação instantânea do pagamento para dar baixa imediata e interromper réguas de cobrança na hora, evitando o erro crítico de cobrar clientes que já quitaram.</p>
                 </div>
             </div>
         </div>
     </section>
+
     <section class="pricing" id="pricing">
         <div class="container">
-            <h2>Preço justo por resultado</h2>
+            <h2>Modelo Comercial Transparente</h2>
+            <p class="pricing-subtitle">Alinhamento total de interesses: nós só ganhamos se você receber de verdade.</p>
             <div class="pricing-card">
-                <h3>Sem custo fixo</h3>
-                <div class="price">7% <span>só sobre o recuperado</span></div>
+                <h3>Piloto & Operação</h3>
+                <div class="price">7% <span>sobre valor recuperado</span></div>
                 <ul class="pricing-features">
-                    <li>Teste grátis por 30 dias</li>
-                    <li>Cobrança via WhatsApp e voz</li>
-                    <li>Conciliação automática</li>
-                    <li>Relatórios de recuperação</li>
-                    <li>Suporte humano se necessário</li>
+                    <li>14 dias de piloto sem compromisso (100 títulos)</li>
+                    <li>R$ 0 de mensalidade fixa ou taxa de adesão</li>
+                    <li>Mensagens WhatsApp Utility em conformidade com Meta</li>
+                    <li>Conciliação e relatório completo de recuperação</li>
+                    <li>Alçada de descontos e parcelamentos definidos por você</li>
+                    <li>Transparência total com registros auditáveis de cada contato</li>
                 </ul>
-                <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Começar agora</button>
+                <button onclick="document.getElementById('piloto').scrollIntoView({behavior: 'smooth'})">Iniciar Piloto com 100 Títulos</button>
             </div>
         </div>
     </section>
-    <footer id="contact">
+
+    <footer>
         <div class="container">
-            <p>© 2026 CobrançaAI — Todos os direitos reservados</p>
-            <p style="margin-top: 10px;">contato@cobrancai.com.br</p>
+            <p>© 2026 CobrançaAI — Tecnologia em Recuperação de Crédito B2B</p>
+            <p style="margin-top: 8px;">Conformidade LGPD & Código de Defesa do Consumidor | contato@cobrancai.com.br</p>
         </div>
     </footer>
 </body>
