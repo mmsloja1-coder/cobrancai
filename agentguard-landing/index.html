@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CobrançaAI — Recuperamos seu dinheiro atrasado</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        header { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5em; font-weight: bold; background: linear-gradient(90deg, #10b981, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links a { color: #94a3b8; text-decoration: none; margin-left: 30px; transition: color 0.3s; }
+        .nav-links a:hover { color: #fff; }
+        .hero { padding: 80px 0 60px; text-align: center; }
+        .badge { display: inline-block; background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 8px 20px; border-radius: 50px; font-size: 0.9em; margin-bottom: 30px; }
+        h1 { font-size: 3.5em; line-height: 1.1; margin-bottom: 20px; background: linear-gradient(90deg, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { font-size: 1.3em; color: #94a3b8; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .cta-box { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 40px; max-width: 500px; margin: 0 auto 60px; border: 1px solid rgba(255,255,255,0.1); }
+        .cta-box h3 { font-size: 1.5em; margin-bottom: 10px; }
+        .cta-box p { color: #94a3b8; margin-bottom: 25px; }
+        input[type="email"] { width: 100%; padding: 15px 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: #fff; font-size: 1em; margin-bottom: 15px; }
+        input[type="email"]::placeholder { color: #64748b; }
+        button { width: 100%; padding: 15px; border-radius: 10px; border: none; background: linear-gradient(90deg, #10b981, #3b82f6); color: #fff; font-size: 1.1em; font-weight: bold; cursor: pointer; transition: transform 0.2s, opacity 0.2s; }
+        button:hover { transform: translateY(-2px); opacity: 0.9; }
+        .note { font-size: 0.85em; color: #64748b; margin-top: 15px; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.1); }
+        .stat { text-align: center; }
+        .stat-number { font-size: 3em; font-weight: bold; background: linear-gradient(90deg, #10b981, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat-label { color: #94a3b8; margin-top: 5px; }
+        .features { padding: 60px 0; }
+        .features h2 { text-align: center; font-size: 2.5em; margin-bottom: 50px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .feature-card { background: rgba(255,255,255,0.05); border-radius: 15px; padding: 30px; border: 1px solid rgba(255,255,255,0.1); transition: transform 0.3s; }
+        .feature-card:hover { transform: translateY(-5px); }
+        .feature-icon { font-size: 2.5em; margin-bottom: 20px; }
+        .feature-card h3 { font-size: 1.3em; margin-bottom: 10px; }
+        .feature-card p { color: #94a3b8; line-height: 1.6; }
+        .pricing { padding: 60px 0; text-align: center; }
+        .pricing h2 { font-size: 2.5em; margin-bottom: 50px; }
+        .pricing-card { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 40px; max-width: 400px; margin: 0 auto; border: 2px solid #10b981; }
+        .pricing-card h3 { font-size: 1.5em; margin-bottom: 10px; }
+        .price { font-size: 3.5em; font-weight: bold; margin: 20px 0; }
+        .price span { font-size: 0.4em; color: #94a3b8; }
+        .pricing-features { list-style: none; margin: 30px 0; text-align: left; }
+        .pricing-features li { padding: 10px 0; color: #cbd5e1; }
+        .pricing-features li::before { content: "✓ "; color: #10b981; font-weight: bold; margin-right: 10px; }
+        footer { padding: 40px 0; text-align: center; color: #64748b; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 60px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">CobrançaAI</div>
+                <div class="nav-links">
+                    <a href="#features">Como funciona</a>
+                    <a href="#pricing">Preço</a>
+                    <a href="#contact">Contato</a>
+                </nav>
+            </nav>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="container">
+            <span class="badge">🚀 Primeiro SaaS brasileiro de cobrança por IA</span>
+            <h1>Recupere até 80% do que seus clientes devem</h1>
+            <p class="subtitle">Nosso agente de IA cobra automaticamente por WhatsApp e voz. Você só paga quando recuperamos.</p>
+            <div class="cta-box">
+                <h3>Comece agora — sem risco</h3>
+                <p>Teste grátis por 30 dias. Sem cartão de crédito.</p>
+                <input type="email" placeholder="Seu melhor email">
+                <button onclick="alert('Obrigado! Entraremos em contato em breve.')">Quero recuperar meu dinheiro</button>
+                <p class="note">🔒 Seus dados estão seguros. Não compartilhamos com terceiros.</p>
+            </div>
+        </div>
+    </section>
+    <section class="stats">
+        <div class="container">
+            <div class="feature-grid">
+                <div class="stat">
+                    <div class="stat-number">80%</div>
+                    <div class="stat-label">Taxa de recuperação</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">24h</div>
+                    <div class="stat-label">Tempo médio de resposta</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">R$ 0</div>
+                    <div class="stat-label">Custo fixo mensal</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">7%</div>
+                    <div class="stat-label">Sobre valor recuperado</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Como funciona</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Conecte suas contas</h3>
+                    <p>Importamos boletos, notas fiscais e extratos do Pix automaticamente. Identificamos quem deve e quanto deve.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Cobrança automática</h3>
+                    <p>Nosso agente envia lembretes educados por WhatsApp e faz ligações de voz. Negocia parcelamento dentro das regras que você definir.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3>Conciliação inteligente</h3>
+                    <p>Quando o cliente paga, conciliamos automaticamente com sua conta bancária. Atualizamos seu fluxo de caixa em tempo real.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2>Preço justo por resultado</h2>
+            <div class="pricing-card">
+                <h3>Sem custo fixo</h3>
+                <div class="price">7% <span>só sobre o recuperado</span></div>
+                <ul class="pricing-features">
+                    <li>Teste grátis por 30 dias</li>
+                    <li>Cobrança via WhatsApp e voz</li>
+                    <li>Conciliação automática</li>
+                    <li>Relatórios de recuperação</li>
+                    <li>Suporte humano se necessário</li>
+                </ul>
+                <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Começar agora</button>
+            </div>
+        </div>
+    </section>
+    <footer id="contact">
+        <div class="container">
+            <p>© 2026 CobrançaAI — Todos os direitos reservados</p>
+            <p style="margin-top: 10px;">contato@cobrancai.com.br</p>
+        </div>
+    </footer>
+</body>
+</html>
