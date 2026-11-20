@@ -1,84 +1,134 @@
-# 🛡️ AgentGuard Brasil
+# 🏷️ CobrançaAI
 
-**AI Agent 可观测性与合规平台** — 专为巴西市场设计
+**Agente de cobrança e conciliação para PMEs brasileiras**
 
-## 🎯 产品定位
-
-针对巴西企业 AI Agent 部署增长迅猛（2026年计划扩张的占比达 **92%**）但缺乏有效监控工具的痛点，AgentGuard 提供：
-
-- **实时成本追踪** — 防止预算超支（当前 2/3 企业报告 AI 成本失控）
-- **LGPD 合规日志** — 自动记录数据处理活动，满足巴西数据保护法规
-- **异常检测** — 识别幻觉、超时、异常 token 消耗
-- **集中化监控** — 统一管理多个 AI Agent
-
-## 🚀 快速开始
-
-### 1. 安装依赖
-```bash
-pip install -r requirements.txt
-```
-
-### 2. 配置环境变量
-```bash
-cp .env.example .env
-# 编辑 .env 填写必要配置
-```
-
-### 3. 启动服务
-```bash
-python -m uvicorn app.main:app --host 0.0.0.0 --port 8000
-```
-
-### 4. 访问管理面板
-打开浏览器访问 `http://localhost:8000/frontend/index.html`
-
-## 📡 API 端点
-
-| 端点 | 方法 | 描述 |
-|------|------|------|
-| `/health` | GET | 健康检查 |
-| `/agents/` | GET | 列出所有代理 |
-| `/agents/` | POST | 注册新代理 |
-| `/agents/{id}` | GET | 获取代理详情 |
-| `/events/ingest` | POST | 上报执行事件 |
-| `/events/stats/{session_id}` | GET | 获取会话统计 |
-
-## 🔧 技术栈
-
-- **后端**: FastAPI + Python 3.14
-- **数据库**: SQLite (轻量) / PostgreSQL (生产)
-- **缓存**: Redis (可选)
-- **前端**: 原生 HTML/CSS/JS
-
-## 💰 商业模式
-
-### 定价策略（建议）
-- **免费版**: 最多 3 个代理，7 天历史数据
-- **专业版**: R$ 297/月 (~$50)，无限代理，30 天历史
-- **企业版**: R$ 997/月 (~$170)，无限历史 + 合规报告导出
-
-### 目标客户
-- 使用 AI Agent 的巴西中小企业
-- 需要 LGPD 合规的企业
-- 多 Agent 部署团队
-
-## 🌍 市场优势（为什么现在做）
-
-1. **市场空白**: 巴西尚无成熟的 AI Agent 监控工具
-2. **需求旺盛**: 92% 企业计划扩展 AI Agent 使用
-3. **合规驱动**: LGPD 要求数据处理的透明度
-4. **成本痛点**: 企业普遍面临 AI 成本失控问题
-
-## 📋 Roadmap
-
-- [ ] v0.1: MVP（当前）— 基础监控与成本追踪
-- [ ] v0.2: 异常检测算法
-- [ ] v0.3: LGPD 合规报告生成
-- [ ] v0.4: 多环境支持（AWS/GCP/Azure）
-- [ ] v1.0: 完整的企业级功能
+Recupera até 80% do que seus clientes devem via WhatsApp e voz. Você só paga quando recuperamos.
 
 ---
 
-**构建时间**: ~30 分钟  
-**首次部署**: 5 分钟  
-**第一笔销售**: 预计 2-4 周（需营销投入）
+## 🎯 O Problema
+
+- **9,4 milhões** de CNPJs inadimplentes no Brasil (R$ 247,8 bi)
+- **8,9 milhões** são micro e pequenas empresas (R$ 214,4 bi)
+- PMEs não têm time de cobrança — perdem receita por falta de processo
+
+---
+
+## 💡 A Solução
+
+Um agente de IA que:
+1. **Importa** boletos, Pix e notas fiscais (Asaas, Conta Azul, Omie, CSV)
+2. **Identifica** quem deve, quanto e quando venceu
+3. **Cobra automaticamente** por WhatsApp e voz — educado, dentro do CDC
+4. **Negocia** parcelamento dentro das regras que você define
+5. **Concilia** automaticamente quando o cliente paga
+6. **Entrega** relatório do que recuperou
+
+---
+
+## 💰 Preço Justo por Resultado
+
+| Modelo | Detalhes |
+|--------|----------|
+| **Taxa de sucesso** | **7% sobre valor recuperado** |
+| **Custo fixo** | **R$ 0,99 por cobrança ativada** |
+| **Teste grátis** | **30 dias** sem cartão |
+
+> Você só paga muito se recuperar muito. Se não recuperar, paga centavos.
+
+---
+
+## 🏗️ Arquitetura
+
+```
+┌─────────────────┐     HTTPS/JSON      ┌──────────────────┐
+│  Landing Page   │ ◄─────────────────► │   API Backend    │
+│  (Vercel)       │   REST API          │  (FastAPI + SQLite)│
+└─────────────────┘                     └──────────────────┘
+                                                │
+                                                ▼
+                                        ┌───────────────┐
+                                        │   Banco       │
+                                        │   SQLite      │
+                                        └───────────────┘
+```
+
+---
+
+## 🚀 Deploy
+
+### Landing Page (Vercel)
+- **Framework:** Static HTML/CSS/JS
+- **Output Directory:** `agentguard-landing`
+- **URL:** `https://cobrancai.vercel.app`
+
+### API Backend (Koyeb / Render / Deta)
+- **Framework:** FastAPI + SQLite
+- **Start Command:** `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+- **Build:** `pip install -r requirements.txt`
+
+---
+
+## 📁 Estrutura
+
+```
+cobrancai/
+├── agentguard-landing/     # Landing page (HTML/CSS/JS)
+│   └── index.html
+├── app/                    # FastAPI Backend
+│   ├── main.py
+│   └── routers/
+│       ├── agents.py
+│       └── events.py
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## 🔧 Desenvolvimento Local
+
+```bash
+# Instalar dependências
+pip install -r requirements.txt
+
+# Rodar API
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+# Rodar Landing Page
+cd agentguard-landing && python -m http.server 8000
+```
+
+---
+
+## 📊 APIs
+
+| Endpoint | Descrição |
+|----------|-----------|
+| `GET /health` | Health check |
+| `GET /agents/` | Listar agentes |
+| `POST /agents/` | Criar agente |
+| `POST /events/ingest` | Ingerir evento |
+| `GET /events/stats/{id}` | Stats da sessão |
+
+---
+
+## 📈 Roadmap
+
+- [x] Landing page (HTML/CSS/JS)
+- [x] API FastAPI + SQLite
+- [ ] Integração Asaas (webhook + API)
+- [ ] Régua de cobrança (48h, CDC compliant)
+- [ ] Dashboard (recuperação, conciliação)
+- [ ] Conciliação automática Pix + boleto
+- [ ] Banco de avaliações (flywheel)
+
+---
+
+## 📝 Licença
+
+MIT License - Livre para uso comercial.
+
+---
+
+**CobrançaAI** — Recuperamos seu dinheiro. Você cresce.
