@@ -87,7 +87,7 @@ app.add_middleware(
 )
 
 # Serve frontend - define path early for use in routes
-frontend_dir = os.path.join(os.path.dirname(__file__), '..', 'frontend')
+frontend_dir = os.path.join(os.path.dirname(__file__), '..', 'agentguard-landing')
 
 # Include routers
 app.include_router(agents_router)
@@ -105,7 +105,7 @@ async def health():
     return {"status": "ok", "timestamp": datetime.utcnow().isoformat()}
 
 # Serve frontend at /frontend path
-frontend_dir = os.path.join(os.path.dirname(__file__), '..', 'frontend')
+frontend_dir = os.path.join(os.path.dirname(__file__), '..', 'agentguard-landing')
 if os.path.exists(frontend_dir):
     app.mount("/frontend", StaticFiles(directory=frontend_dir), name="static")
 
