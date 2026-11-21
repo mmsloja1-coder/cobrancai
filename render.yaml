@@ -1,0 +1,32 @@
+services:
+  # Landing Page Estática (servida na raiz /)
+  - type: web
+    name: cobrancai-landing
+    env: static
+    buildCommand: "echo 'Static site - no build needed'"
+    staticPublishPath: ./agentguard-landing
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: NODE_VERSION
+        value: "18"
+
+  # API Backend (FastAPI) em /api
+  - type: web
+    name: cobrancai-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: DATABASE_URL
+        value: sqlite:///./agentguard.db
+      - key: PYTHONPATH
+        value: /opt/render/project/src
+    region: oregon
+    plan: free
+    healthCheckPath: /health
+    autoDeploy: true
