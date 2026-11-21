@@ -1,0 +1,11 @@
+Nome,Telefone WhatsApp,Valor,Vencimento original,Nº Boleto / NF,Descrição,Desconto máximo permitido (%),Parcelamento máximo (x),Novo vencimento máximo (dias),Observação
+João Silva,(77) 99999-1111,450.00,2026-10-05,BLT-202610-001,Mensalidade Outubro - Escola Alfa,5,2,10,
+Maria Santos,(77) 99999-2222,890.00,2026-10-05,BLT-202610-002,Mensalidade Outubro - Escola Alfa,5,2,10,
+Pedro Oliveira,(77) 99999-3333,1200.00,2026-09-20,BLT-202609-015,Mensalidade Setembro - Clínica Beta,10,2,15,
+Ana Costa,(77) 99999-4444,650.00,2026-10-10,NF-202610-089,Parcela 3/12 - Distribuidora Gama,0,1,0,
+Carlos Lima,(77) 99999-5555,2100.00,2026-09-15,BLT-202609-042,Mensalidade Setembro - SaaS Delta,5,2,10,
+Fernanda Rocha,(77) 99999-6666,320.00,2026-10-01,NF-202610-012,Parcela 2/6 - Academia Ômega,0,1,0,
+Roberto Alves,(77) 99999-7777,1500.00,2026-09-28,BLT-202609-088,Mensalidade Setembro - Colégio Épsilon,10,2,10,
+Juliana Martins,(77) 99999-8888,780.00,2026-10-05,BLT-202610-023,Mensalidade Outubro - Laboratório Zeta,5,2,10,
+Ricardo Souza,(77) 99999-9999,2500.00,2026-09-10,BLT-202609-001,Mensalidade Setembro - Distribuidora Teta,5,2,10,
+Patricia Gomes,(77) 99999-0000,420.00,2026-10-05,NF-202610-045,Parcela 4/10 - Clínica Iota,5,2,10,
