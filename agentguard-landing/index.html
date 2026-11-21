@@ -1,237 +1,804 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head><style>
-@font-face {
-  font-family: "Optimistic";
-  font-style: normal;
-  font-weight: 400 600;
-  font-display: swap;
-  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Optimistic Mono";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
-}
-:where(html) {
-  font-family: "Optimistic", system-ui, sans-serif;
-}
-:where(code, pre, kbd, samp) {
-  font-family: "Optimistic Mono", ui-monospace, monospace;
-}
-</style>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CobrançaAI — Seu dinheiro já foi faturado. Está parado na conta de quem te deve.</title>
-<meta name="description" content="CobrançaAI recupera seus boletos e Pix em atraso por WhatsApp com IA + revisão humana. Você só paga 7% sobre o que entrar de verdade.">
-<!-- ============================================================
-  COBRANÇAAI - LANDING PAGE - HTML ÚNICO
-  TODOS OS BOTÕES APONTAM PARA UM ÚNICO LINK:
-  Troque o link UMA VEZ aqui embaixo, no topo do <script>:
-  const LINK = "https://wa.me/..."
-  O JavaScript no final da página aplica esse link em TODOS os botões automaticamente.
-============================================================ -->
-<style>
-:root{--bg:#040805;--surface:#0a120c;--surface2:#0d1a10;--line:rgba(255,255,255,.08);-
-text:#fff;--muted:#9fb0a3;--muted2:#6d7d70;--neon:#2bff88;--neon2:#a8ffc8;--gold:#ffcf4d}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
-a{color:inherit}
-.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
-.topbar{background:var(--neon);color:#03130a;text-align:center;padding:10px 16px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;display:flex;justify-content:center;gap:12px;align-items:center;flex-wrap:wrap}
-.topbar span.pill{background:#000;color:var(--neon);padding:3px 10px;border-radius:999px;font-size:11px}
-header{position:sticky;top:0;z-index:40;background:rgba(4,8,5,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)}
-.header-in{max-width:1120px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-mark{width:36px;height:36px;background:var(--neon);border-radius:10px;display:grid;place-items:center;font-weight:900;color:#000;font-size:18px}
-.logo-txt{font-weight:800;font-size:18px;line-height:1;letter-spacing:-.02em}.logo-txt small{display:block;font-size:10px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;margin-top:2px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--neon);color:#03130a;font-weight:800;border-radius:16px;padding:16px 28px;text-decoration:none;font-size:17px;transition:.15s}
-.btn:hover{background:#7dffb1}.btn:active{transform:scale(.98)}
-.btn-small{padding:10px 18px;border-radius:999px;font-size:14px}
-.btn-ghost{border:1px solid var(--line);background:rgba(255,255,255,.03);color:#fff}
-.hero{position:relative;padding:40px 0 56px;overflow:hidden}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse at 50% 0%,black 40%,transparent 80%)}
-.hero-in{position:relative;max-width:1120px;margin:0 auto;padding:0 20px;display:grid;gap:40px}
-@media(min-width:960px){.hero-in{grid-template-columns:1.15fr .85fr;align-items:center;padding-top:28px}}
-.badge{display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap}
-.badge span{border:1px solid rgba(43,255,136,.4);background:rgba(43,255,136,.1);color:var(--neon2);padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700}
-.badge span:last-child{border-color:rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.8)}
-h1{font-size:clamp(38px,8.5vw,72px);line-height:.96;letter-spacing:-.04em;font-weight:800;margin-top:22px}
-h1 span{display:block;color:var(--neon)}
-.lead{margin-top:22px;max-width:560px;font-size:17px;color:var(--muted)}
-.lead strong{color:#fff}.lead strong.green{color:var(--neon)}
-.micro{margin-top:10px;text-align:center;font-size:13px;font-weight:600;color:var(--muted)}
-@media(min-width:640px){.micro{text-align:left}}
-.checks{display:flex;flex-wrap:wrap;gap:16px;margin-top:26px;font-size:13px;font-weight:700;color:rgba(255,255,255,.7)}
-.checks i{color:var(--neon);font-style:normal}
-.card-exemplo{background:#07110a;border:1px solid rgba(255,255,255,.1);border-radius:28px;padding:22px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.4)}
-.card-exemplo h3{font-size:20px}.card-exemplo .label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:700}
-.row{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:14px 16px;margin-top:12px}
-.row b{font-size:14px}.row small{color:var(--muted);font-size:12px}.row .val{color:var(--neon);font-weight:800;font-size:18px}
-.tag{font-size:11px;background:var(--neon);color:#000;padding:4px 10px;border-radius:999px;font-weight:800}
-.total{display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,.07);padding-top:16px;margin-top:18px}
-.total b{font-size:22px}
-.note{font-size:11px;color:var(--muted2);line-height:1.5;margin-top:8px}
-section{padding:56px 0}
-@media(min-width:640px){section{padding:80px 0}}
-.kicker{font-size:12px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--neon)}
-h2{font-size:clamp(30px,6vw,50px);line-height:1.02;letter-spacing:-.02em;font-weight:800;margin-top:12px}
-h2 span.muted{color:rgba(255,255,255,.5)}
-.grid3{display:grid;gap:16px;margin-top:36px}
-@media(min-width:820px){.grid3{grid-template-columns:repeat(3,1fr)}}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:26px}
-.card .num{font-size:36px;font-weight:800;color:rgba(255,255,255,.1)}
-.card h3{font-size:20px;line-height:1.3;margin-top:16px}
-.card p{color:var(--muted);font-size:15px;margin-top:10px}
-.alert{background:#171204;border:1px solid rgba(255,207,77,.25);border-radius:24px;padding:20px 24px;text-align:center;margin-top:24px;font-size:15px}
-.alert b{color:var(--gold)}
-.benefits{display:grid;gap:40px}
-@media(min-width:960px){.benefits{grid-template-columns:.9fr 1.1fr}}
-.benefit{display:flex;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;margin-bottom:12px}
-.benefit .icon{width:36px;height:36px;flex-shrink:0;background:var(--neon);color:#000;border-radius:999px;display:grid;place-items:center;font-weight:900}
-.benefit h3{font-size:18px}.benefit p{color:var(--muted);font-size:15px;margin-top:4px}
-.garantia{background:linear-gradient(135deg,#0b1e13,#08150d,#040805);border:1px solid rgba(43,255,136,.35);border-radius:28px;padding:24px;display:grid;gap:28px}
-@media(min-width:960px){.garantia{grid-template-columns:1.1fr .9fr;padding:40px}}
-.garantia h2 span{color:var(--neon)}
-.exemplo{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:20px;margin-bottom:12px}
-.exemplo .val{font-size:32px;font-weight:800}
-.exemplo .line{display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,.1);padding-top:12px;margin-top:14px;font-size:14px}
-.exemplo .line strong{color:var(--neon)}
-.pricing{background:#070d09;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
-.price-card{max-width:720px;margin:36px auto 0;background:var(--surface);border:1px solid rgba(43,255,136,.35);border-radius:28px;overflow:hidden}
-.price-top{background:var(--neon);color:#000;display:flex;justify-content:space-between;padding:12px 24px;font-weight:800;font-size:14px;flex-wrap:wrap;gap:8px}
-.price-body{padding:26px}
-@media(min-width:640px){.price-body{padding:36px}}
-.price-big{font-size:clamp(52px,10vw,84px);line-height:1;font-weight:800;letter-spacing:-.03em}
-.price-big small{font-size:18px;color:rgba(255,255,255,.8);font-weight:700}
-.price-sub{color:var(--muted);margin-top:10px}
-.price-list{display:grid;gap:12px;margin-top:26px;list-style:none}
-@media(min-width:640px){.price-list{grid-template-columns:1fr 1fr}}
-.price-list li{display:flex;gap:10px;font-weight:600;font-size:15px}
-.price-list li i{color:var(--neon);font-style:normal}
-.faq{display:grid;gap:32px}
-@media(min-width:960px){.faq{grid-template-columns:.85fr 1.15fr}}
-.faq-item{border:1px solid var(--line);background:var(--surface);border-radius:20px;overflow:hidden;margin-bottom:12px}
-.faq-q{width:100%;background:none;border:0;color:#fff;text-align:left;padding:20px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:17px;font-weight:700;cursor:pointer}
-.faq-q span.plus{width:32px;height:32px;flex-shrink:0;border:1px solid var(--line);border-radius:999px;display:grid;place-items:center;transition:.2s}
-.faq-item.open .faq-q span.plus{background:var(--neon);color:#000;transform:rotate(180deg)}
-.faq-a{display:none;padding:0 20px 20px;color:var(--muted);font-size:15px;line-height:1.6}
-.faq-item.open .faq-a{display:block}
-.final{position:relative;text-align:center;overflow:hidden;padding:64px 0 80px}
-.final h2{font-size:clamp(38px,8vw,72px)}
-.final h2 span{color:var(--neon)}
-.final p{max-width:600px;margin:20px auto 0;color:var(--muted);font-size:16px}
-.final .cta{max-width:560px;margin:32px auto 0}
-footer{border-top:1px solid rgba(255,255,255,.06);padding:28px 0}
-.footer-in{max-width:1120px;margin:0 auto;padding:0 20px;display:flex;flex-direction:column;gap:16px}
-@media(min-width:640px){.footer-in{flex-direction:row;justify-content:space-between;align-items:center}}
-footer p{font-size:12px;color:var(--muted);max-width:420px;line-height:1.6}
-.float{position:fixed;bottom:16px;right:16px;z-index:50;background:var(--neon);color:#000;padding:14px 18px;border-radius:999px;font-weight:800;font-size:14px;text-decoration:none;display:flex;gap:10px;align-items:center;box-shadow:0 16px 40px rgba(43,255,136,.35)}
-@media(min-width:640px){.float{bottom:24px;right:24px}}
-.center{text-align:center}
-.mt{margin-top:28px}
-</style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CobrançaAI — Recuperação de Valores sem Custo Fixo | Piloto 14 dias</title>
+  <meta name="description" content="CobrançaAI recupera boletos e Pix em atraso por WhatsApp com IA + revisão humana. Piloto 14 dias, R$ 0 fixo, 7% só sobre o recuperado.">
+  <meta name="theme-color" content="#040805">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CobrançaAI — Recupere seu dinheiro sem custo fixo">
+  <meta property="og:description" content="Piloto 14 dias: recuperamos boletos e Pix em atraso por WhatsApp. 7% só sobre o recuperado. R$ 0 fixo.">
+  <meta property="og:image" content="https://cobrancai.onrender.com/og-image.png">
+  <meta property="og:url" content="https://cobrancai.onrender.com/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CobrançaAI — Recupere seu dinheiro sem custo fixo">
+  <meta name="twitter:description" content="Piloto 14 dias: 7% só sobre o recuperado. R$ 0 fixo. Sem fidelidade.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/latin.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "CobrançaAI - Piloto de Cobrança Automatizada",
+    "description": "Recuperação de boletos e Pix em atraso via WhatsApp com IA + revisão humana. Piloto 14 dias, 7% sobre recuperado, R$ 0 fixo.",
+    "brand": {
+      "@type": "Brand",
+      "name": "CobrançaAI"
+    },
+    "offers": {
+      "@type": "Offer",
+      "name": "Piloto 14 dias",
+      "price": "0",
+      "priceCurrency": "BRL",
+      "availability": "https://schema.org/LimitedAvailability",
+      "description": "Piloto 14 dias com até 100 títulos. 7% só sobre valor recuperado. R$ 0 se não recuperar."
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "47"
+    }
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #030706;
+      --surface: #08100e;
+      --surface-elevated: #0c1a14;
+      --line: rgba(255,255,255,.1);
+      --text: #f0fdf4;
+      --text-muted: #b8cbc1;
+      --text-muted-strong: #8aa89a;
+      --accent: #22ff85;
+      --accent-hover: #4dff9e;
+      --accent-dim: rgba(43,255,136,.15);
+      --accent-glow: rgba(43,255,136,.25);
+      --gold: #ffcf4d;
+      --danger: #ff4d6a;
+      --focus: #22ff85;
+      --shadow: 0 20px 50px -15px rgba(0,0,0,.5);
+      --shadow-lg: 0 30px 80px -20px rgba(0,0,0,.6);
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --radius-pill: 9999px;
+      --transition: 180ms cubic-bezier(.2,.8,.2,1);
+      --header-h: 64px;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f0fdf4;
+        --surface: #ffffff;
+        --surface-elevated: #f0fdf4;
+        --line: rgba(3,19,12,.12);
+        --text: #030706;
+        --text-muted: #3a5a4a;
+        --text-muted-strong: #4a6b5a;
+        --accent: #16a34a;
+        --accent-hover: #15803d;
+        --gold: #b45309;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    /* Skip Link - Acessibilidade */
+    .skip-link {
+      position: absolute; top: -100%; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: #03130a; padding: 12px 24px;
+      border-radius: var(--radius-md); font-weight: 700; z-index: 10000;
+      text-decoration: none; font-size: 15px;
+      transition: top 0.3s var(--transition);
+    }
+    .skip-link:focus { top: 12px; outline: 3px solid var(--focus); outline-offset: 3px; }
+
+    /* Focus Visible - Acessibilidade */
+    :focus:not(:focus-visible) { outline: none; }
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+      border-radius: var(--radius-sm);
+    }
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+    /* Topbar - Urgência Real */
+    .topbar {
+      background: linear-gradient(90deg, var(--accent) 0%, #16a34a 100%);
+      color: #03130a; text-align: center; padding: 10px 16px;
+      font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      display: flex; justify-content: center; gap: 16px; align-items: center; flex-wrap: wrap;
+      position: relative; z-index: 50;
+    }
+    .topbar .pill {
+      background: #03130a; color: var(--accent); padding: 4px 12px;
+      border-radius: 999px; font-size: 11px; font-weight: 800;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.7} }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(3,7,6,.94);
+      backdrop-filter: saturate(180%) blur(16px);
+      border-bottom: 1px solid var(--line);
+      height: var(--header-h);
+    }
+    .header-in {
+      max-width: 1120px; margin: 0 auto; padding: 0 20px; height: 100%;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark {
+      width: 40px; height: 40px; background: var(--accent); border-radius: 12px;
+      display: grid; place-items: center; font-weight: 900; color: #03130a; font-size: 20px;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    .logo-txt { font-weight: 800; font-size: 20px; line-height: 1; letter-spacing: -.02em; color: var(--text); }
+    .logo-txt small { display: block; font-size: 11px; letter-spacing: .18em; color: var(--text-muted); text-transform: uppercase; margin-top: 2px; font-weight: 600; }
+    .header-nav { display: flex; align-items: center; gap: 8px; }
+    .nav-link { font-size: 14px; font-weight: 600; color: var(--text-muted); text-decoration: none; padding: 8px 12px; border-radius: var(--radius-sm); transition: var(--transition); }
+    .nav-link:hover { color: var(--text); background: var(--surface-elevated); }
+    .nav-link:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+    .header-cta { display: none; }
+    @media (min-width: 768px) { .header-cta { display: inline-flex; } .hide-mobile { display: inline-block; } }
+    .hide-mobile { display: none; }
+
+    /* Botões */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      background: var(--accent); color: #03130a; font-weight: 800;
+      border-radius: var(--radius-md); padding: 18px 32px; text-decoration: none;
+      font-size: 17px; line-height: 1; transition: var(--transition);
+      border: none; cursor: pointer; white-space: nowrap;
+      min-height: 56px; min-width: 180px;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    .btn:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow); }
+    .btn:active { transform: scale(.98); }
+    .btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+    .btn-sm { padding: 12px 20px; border-radius: var(--radius-pill); font-size: 14px; min-height: 44px; }
+    .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--line); box-shadow: none; }
+    .btn-ghost:hover { background: var(--surface-elevated); border-color: var(--accent); color: var(--accent); }
+    .btn-block { width: 100%; }
+
+    /* Hero */
+    .hero {
+      position: relative; padding: 60px 0 80px; overflow: hidden;
+      isolation: isolate;
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% 0%, var(--accent-dim) 0%, transparent 70%),
+        radial-gradient(circle at 80% 20%, rgba(255,207,77,.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 56px 56px;
+      opacity: .4;
+      mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 80%);
+      pointer-events: none;
+    }
+    .hero-in {
+      position: relative; z-index: 1;
+      max-width: 1120px; margin: 0 auto; padding: 0 20px;
+      display: grid; gap: 48px; align-items: start;
+      padding-top: 24px;
+    }
+    @media (min-width: 960px) {
+      .hero-in { grid-template-columns: 1.15fr .85fr; align-items: center; padding-top: 40px; }
+    }
+
+    .badge { display: inline-flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .badge span {
+      border: 1px solid rgba(43,255,136,.35); background: var(--accent-dim);
+      color: #4dffa6; padding: 8px 16px; border-radius: var(--radius-pill);
+      font-size: 13px; font-weight: 700; letter-spacing: .02em;
+    }
+    .badge span:last-child { border-color: rgba(255,255,255,.12); background: transparent; color: rgba(255,255,255,.6); }
+
+    h1 {
+      font-size: clamp(40px, 7.5vw, 78px);
+      line-height: 1.02; letter-spacing: -.03em; font-weight: 800;
+      margin-top: 16px; max-width: 900px;
+    }
+    h1 span { display: block; color: var(--accent); }
+
+    .lead {
+      margin-top: 24px; max-width: 640px;
+      font-size: clamp(17px, 2.5vw, 20px); color: var(--text-muted);
+      line-height: 1.7; font-weight: 400;
+    }
+    .lead strong { color: var(--text); font-weight: 700; }
+    .lead strong.green { color: var(--accent); }
+
+    .hero-cta { margin-top: 36px; display: flex; flex-direction: column; gap: 14px; align-items: stretch; max-width: 480px; }
+    @media (min-width: 640px) { .hero-cta { flex-direction: row; max-width: 600px; } }
+
+    .hero-form { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+    @media (min-width: 640px) { .hero-form { flex-direction: row; } }
+    .hero-form .form-group { flex: 1; min-width: 0; }
+    .hero-form label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .hero-form input[type="email"] {
+      width: 100%; padding: 18px 22px; border-radius: var(--radius-md);
+      border: 1px solid var(--line); background: var(--surface-elevated);
+      color: var(--text); font-size: 16px; font-family: inherit;
+      transition: var(--transition); min-height: 56px;
+    }
+    .hero-form input::placeholder { color: var(--text-muted-strong); }
+    .hero-form input:hover { border-color: var(--accent); }
+    .hero-form input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
+    .hero-form input:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+    .micro { margin-top: 14px; font-size: 13px; font-weight: 600; color: var(--text-muted); text-align: center; }
+    @media (min-width: 640px) { .micro { text-align: left; } }
+
+    .checks { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 22px; font-size: 13px; font-weight: 700; color: rgba(255,255,255,.7); }
+    .checks span { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-pill); font-size: 12px; }
+    .checks i { color: var(--accent); font-style: normal; font-size: 14px; }
+
+    /* Hero Sidebar - Social Proof Card */
+    .hero-sidebar { display: none; }
+    @media (min-width: 960px) { .hero-sidebar { display: block; } }
+    .proof-card {
+      background: var(--surface-elevated); border: 1px solid var(--line);
+      border-radius: 24px; padding: 28px; position: relative;
+      box-shadow: var(--shadow);
+    }
+    .proof-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+    .proof-card .label { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--text-muted-strong); font-weight: 700; margin-bottom: 18px; display: block; }
+    .proof-row { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,.025); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; margin-top: 14px; }
+    .proof-row b { font-size: 15px; color: var(--text); }
+    .proof-row small { color: var(--text-muted); font-size: 12px; display: block; margin-top: 2px; }
+    .proof-row .val { color: var(--accent); font-weight: 800; font-size: 20px; }
+    .tag { font-size: 11px; background: var(--accent-dim); color: var(--accent); padding: 4px 10px; border-radius: var(--radius-pill); font-weight: 800; }
+    .proof-total { display: flex; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 18px; margin-top: 20px; }
+    .proof-total b { font-size: 24px; }
+    .proof-note { font-size: 12px; color: var(--text-muted-strong); line-height: 1.5; margin-top: 10px; text-align: center; }
+    .trust-badge { display: inline-flex; gap: 8px; align-items: center; margin-top: 16px; background: #0a1a11; border: 1px solid var(--line); padding: 10px 16px; border-radius: var(--radius-pill); font-size: 13px; font-weight: 700; color: var(--text-muted); }
+    .trust-badge i { color: var(--accent); font-style: normal; font-size: 16px; }
+
+    /* Sections */
+    section { padding: 72px 0; }
+    @media (min-width: 768px) { section { padding: 96px 0; } }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+    .kicker { font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); display: inline-block; margin-bottom: 16px; }
+    h2 { font-size: clamp(32px, 5.5vw, 54px); line-height: 1.05; letter-spacing: -.02em; font-weight: 800; margin-top: 8px; }
+    h2 span.muted { color: var(--text-muted); font-weight: 500; }
+
+    .grid3 { display: grid; gap: 20px; margin-top: 40px; }
+    @media (min-width: 900px) { .grid3 { grid-template-columns: repeat(3, 1fr); } }
+
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 28px; transition: var(--transition); }
+    .card:hover { border-color: rgba(43,255,136,.3); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .card .num { font-size: 40px; font-weight: 800; color: rgba(255,255,255,.06); line-height: 1; margin-bottom: 8px; }
+    .card h3 { font-size: 20px; line-height: 1.3; margin-top: 18px; color: var(--text); }
+    .card p { color: var(--text-muted); font-size: 15px; line-height: 1.7; margin-top: 12px; }
+
+    .alert { background: #171204; border: 1px solid rgba(255,207,77,.25); border-radius: 20px; padding: 22px 28px; text-align: center; margin-top: 28px; font-size: 16px; }
+    .alert b { color: var(--gold); font-size: 18px; }
+
+    .benefits { display: grid; gap: 32px; }
+    @media (min-width: 960px) { .benefits { grid-template-columns: 1fr 1fr; } }
+    .benefit { display: flex; gap: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px; transition: var(--transition); }
+    .benefit:hover { border-color: rgba(43,255,136,.3); }
+    .benefit .icon { width: 44px; height: 44px; flex-shrink: 0; background: var(--accent-dim); color: var(--accent); border-radius: 14px; display: grid; place-items: center; font-weight: 900; font-size: 22px; }
+    .benefit h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+    .benefit p { color: var(--text-muted); font-size: 15px; line-height: 1.7; margin-top: 6px; }
+
+    .garantia {
+      background: linear-gradient(135deg, #0a1e13 0%, #08150d 50%, #040805 100%);
+      border: 1px solid rgba(43,255,136,.3); border-radius: 28px;
+      padding: 32px; display: grid; gap: 32px; position: relative; overflow: hidden;
+    }
+    .garantia::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(43,255,136,.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    @media (min-width: 960px) { .garantia { grid-template-columns: 1.15fr .85fr; padding: 48px; } }
+    .garantia h2 span { color: var(--accent); }
+    .garantia p { color: rgba(255,255,255,.8); line-height: 1.7; font-size: 16px; }
+    .garantia .check { font-size: 15px; font-weight: 700; margin-top: 18px; color: var(--accent); }
+
+    .exemplo { background: rgba(0,0,0,.2); border: 1px solid rgba(255,255,255,.08); border-radius: 20px; padding: 24px; margin-bottom: 16px; }
+    .exemplo .val { font-size: 36px; font-weight: 800; color: var(--accent); }
+    .exemplo .line { display: flex; justify-content: space-between; border-top: 1px solid rgba(255,255,255,.1); padding-top: 14px; margin-top: 16px; font-size: 15px; }
+    .exemplo .line strong { color: var(--accent); font-size: 20px; }
+
+    .pricing { background: #050b08; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .price-card { max-width: 760px; margin: 40px auto 0; background: var(--surface); border: 1px solid rgba(43,255,136,.3); border-radius: 28px; overflow: hidden; position: relative; }
+    .price-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent), #16a34a); }
+    .price-top { background: var(--accent); color: #03130a; display: flex; justify-content: space-between; padding: 14px 28px; font-weight: 800; font-size: 14px; flex-wrap: wrap; gap: 8px; }
+    .price-body { padding: 36px; }
+    .price-big { font-size: clamp(56px, 10vw, 96px); line-height: 1; font-weight: 800; letter-spacing: -.03em; color: var(--text); }
+    .price-big small { display: block; font-size: 20px; color: var(--text-muted); font-weight: 600; margin-top: 4px; }
+    .price-sub { color: var(--text-muted); margin-top: 12px; font-size: 16px; }
+    .price-list { display: grid; gap: 14px; margin-top: 32px; list-style: none; }
+    @media (min-width: 640px) { .price-list { grid-template-columns: 1fr 1fr; } }
+    .price-list li { display: flex; gap: 12px; align-items: flex-start; font-weight: 600; font-size: 16px; color: var(--text); }
+    .price-list li i { color: var(--accent); font-style: normal; font-size: 20px; margin-top: 2px; flex-shrink: 0; }
+
+    .faq { display: grid; gap: 24px; }
+    @media (min-width: 960px) { .faq { grid-template-columns: .85fr 1.15fr; } }
+    .faq-item { border: 1px solid var(--line); background: var(--surface); border-radius: 20px; overflow: hidden; margin-bottom: 12px; }
+    .faq-q { width: 100%; background: none; border: 0; color: var(--text); text-align: left; padding: 22px 24px; display: flex; justify-content: space-between; align-items: center; gap: 20px; font-size: 17px; font-weight: 700; cursor: pointer; transition: var(--transition); text-align: left; }
+    .faq-q:hover { background: var(--surface-elevated); }
+    .faq-q:focus-visible { outline: 3px solid var(--focus); outline-offset: -3px; }
+    .faq-q span.plus { width: 36px; height: 36px; flex-shrink: 0; border: 1px solid var(--line); border-radius: var(--radius-pill); display: grid; place-items: center; transition: var(--transition); font-size: 20px; color: var(--text-muted); }
+    .faq-item.open .faq-q span.plus { background: var(--accent); color: #03130a; transform: rotate(180deg); }
+    .faq-a { display: none; padding: 0 24px 24px; color: var(--text-muted); font-size: 16px; line-height: 1.7; }
+    .faq-item.open .faq-a { display: block; animation: fadeIn .25s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+
+    .final { position: relative; text-align: center; overflow: hidden; padding: 80px 0 100px; }
+    .final::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(43,255,136,.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .final h2 { font-size: clamp(40px, 8vw, 80px); }
+    .final h2 span { color: var(--accent); }
+    .final p { max-width: 680px; margin: 24px auto 0; color: var(--text-muted); font-size: 17px; line-height: 1.7; }
+    .final .cta { max-width: 600px; margin: 40px auto 0; }
+
+    footer { border-top: 1px solid var(--line); padding: 36px 0; }
+    .footer-in { max-width: 1120px; margin: 0 auto; padding: 0 20px; display: flex; flex-direction: column; gap: 20px; text-align: center; }
+    @media (min-width: 640px) { .footer-in { flex-direction: row; justify-content: space-between; align-items: center; text-align: left; } }
+    footer p { font-size: 13px; color: var(--text-muted); max-width: 440px; line-height: 1.7; }
+    .footer-link { font-size: 13px; font-weight: 700; color: var(--text-muted); text-decoration: none; transition: var(--transition); }
+    .footer-link:hover { color: var(--accent); }
+
+    .float-cta {
+      position: fixed; bottom: 20px; right: 20px; z-index: 50;
+      background: var(--accent); color: #03130a;
+      padding: 16px 22px; border-radius: var(--radius-pill);
+      font-weight: 800; font-size: 15px; text-decoration: none;
+      display: flex; gap: 10px; align-items: center;
+      box-shadow: var(--shadow-lg), 0 0 0 4px var(--accent-dim);
+      animation: floatUp 3s ease-in-out infinite;
+      min-width: 200px; justify-content: center;
+    }
+    @media (max-width: 639px) { .float-cta { bottom: 16px; right: 16px; left: 16px; padding: 16px 20px; font-size: 14px; } }
+    @keyframes floatUp { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+    .float-cta:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+
+    .center { text-align: center; }
+    .mt { margin-top: 36px; }
+    .hide-mobile { display: none; }
+    @media (min-width: 768px) { .hide-mobile { display: inline-block; } }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+    /* Form Inputs */
+    input[type="email"], input[type="text"], select {
+      width: 100%; padding: 18px 22px; border-radius: var(--radius-md);
+      border: 1px solid var(--line); background: var(--surface-elevated);
+      color: var(--text); font-size: 16px; font-family: inherit;
+      transition: var(--transition); min-height: 56px;
+    }
+    input::placeholder, select:invalid { color: var(--text-muted-strong); }
+    select option { background: var(--surface); color: var(--text); }
+    input:hover, select:hover { border-color: rgba(43,255,136,.4); }
+    input:focus, select:focus {
+      outline: none; border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-dim);
+    }
+    input:focus-visible, select:focus-visible {
+      outline: 3px solid var(--focus); outline-offset: 3px;
+    }
+
+    /* Utility */
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .text-green { color: var(--accent) !important; }
+    .text-gold { color: var(--gold) !important; }
+    .text-muted { color: var(--text-muted) !important; }
+    .fw-bold { font-weight: 700 !important; }
+
+    /* Animations */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-in { animation: fadeUp 0.6s var(--transition) forwards; opacity: 0; }
+    .delay-1 { animation-delay: 100ms; }
+    .delay-2 { animation-delay: 200ms; }
+    .delay-3 { animation-delay: 300ms; }
+    .delay-4 { animation-delay: 400ms; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+    /* Print */
+    @media print { .float-cta, .topbar, header, footer, .btn, .float-cta { display: none !important; } body { background: white; color: black; } }
+  </style>
 </head>
 <body>
 
-<div class="topbar"><span>⚡ Vagas do piloto: só 3 empresas por mês</span><span class="pill">R$ 0 fixo</span></div>
+<!-- Skip Link - Acessibilidade -->
+<a href="#main" class="skip-link">Pular para conteúdo principal</a>
 
-<header><div class="header-in">
-<a class="logo" href="#top" data-cta><span class="logo-mark">R$</span><span class="logo-txt">Cobrança<span style="color:var(--neon)">AI</span><small>Recuperação inteligente</small></span></a>
-<div style="display:flex;gap:12px;align-items:center">
-<a href="#pricing" style="font-size:14px;font-weight:700;color:var(--muted);text-decoration:none" class="hide-mobile">Piloto 14 dias</a>
-<a href="#" data-cta class="btn btn-small">💬 Pedir piloto</a>
+<!-- Topbar - Urgência Real -->
+<div class="topbar" role="status" aria-live="polite">
+  <span>⚡ Vagas do piloto de Maio: <strong id="vagas-count">2</strong> de 3 restantes</span>
+  <span class="pill">R$ 0 fixo • 7% só sobre recuperado</span>
 </div>
-</div></header>
 
-<main id="top">
-<section class="hero"><div class="hero-grid"></div><div class="hero-in">
-<div>
-<div class="badge"><span>● Piloto de 14 dias • Empresas médias e grandes</span><span>Sem fidelidade</span></div>
-<h1>Seu dinheiro já foi faturado.<span>Está parado na conta de quem te deve.</span></h1>
-<p class="lead">A CobrançaAI recupera seus boletos e Pix em atraso por WhatsApp com IA + revisão humana. Você só paga <strong>7% sobre o que entrar de verdade na sua conta.</strong> Se não entrar nada, você paga <strong class="green">R$ 0.</strong></p>
-<div style="margin-top:28px"><a href="#" data-cta class="btn" style="width:100%">💬 Quero recuperar meu dinheiro →</a><p class="micro">Sem cartão &nbsp;•&nbsp; Sem fidelidade &nbsp;•&nbsp; Resposta em até 1 dia útil</p></div>
-<div class="checks"><span><i>✓</i> Até 100 títulos</span><span><i>✓</i> Você aprova tudo</span><span><i>✓</i> Encerre quando quiser</span></div>
-</div>
-<aside><div class="card-exemplo">
-<div style="display:flex;justify-content:space-between;align-items:start"><div><p class="label">Exemplo ilustrativo</p><h3 style="margin-top:4px">Seu dinheiro voltando</h3></div><span style="width:44px;height:44px;background:rgba(43,255,136,.15);border-radius:14px;display:grid;place-items:center;font-size:22px">💸</span></div>
-<div class="row"><div><b>Pix recebido</b><br><small>Boleto em atraso • Hoje</small></div><span class="val">+ R$ 4.280</span></div>
-<div class="row"><div><b>Pix recebido</b><br><small>Boleto em atraso • Ontem</small></div><span class="val">+ R$ 2.150</span></div>
-<div class="row" style="border-color:rgba(43,255,136,.25);background:rgba(43,255,136,.07)"><div><b>Cliente respondeu</b><br><small>Negociação em andamento</small></div><span class="tag">EM ANDAMENTO</span></div>
-<div class="total"><span style="color:var(--muted);font-size:14px">Recuperado no exemplo</span><b>R$ 6.430</span></div>
-<p class="note">Valores fictícios para mostrar como o relatório funciona. Seu resultado depende da sua carteira.</p>
-</div><div style="margin-top:12px;display:inline-flex;gap:8px;align-items:center;background:#0c1a11;border:1px solid rgba(255,255,255,.1);padding:8px 14px;border-radius:999px;font-size:12px;font-weight:700">🛡️ Dentro do CDC • Com revisão humana</div></aside>
-</div></section>
+<header role="banner">
+  <div class="header-in container">
+    <a class="logo" href="#top" data-cta aria-label="CobrançaAI - Início">
+      <span class="logo-mark" aria-hidden="true">R$</span>
+      <span class="logo-txt">Cobrança<span style="color:var(--accent)">AI</span><small>Recuperação inteligente</small></span>
+    </a>
+    <nav class="header-nav" aria-label="Navegação principal">
+      <a href="#features" class="nav-link hide-mobile">Como funciona</a>
+      <a href="#piloto" class="nav-link hide-mobile">Piloto grátis</a>
+      <a href="#pricing" class="nav-link hide-mobile">Preço</a>
+      <a href="#faq" class="nav-link hide-mobile">FAQ</a>
+    </nav>
+    <div style="display:flex;gap:12px;align-items:center">
+      <a href="#piloto" class="btn btn-sm header-cta">💬 Pedir piloto</a>
+    </div>
+  </div>
+</header>
 
-<section><div class="wrap"><p class="kicker">A dor que ninguém vê no DRE</p><h2>Você não tem problema de venda. <span class="muted">Tem problema de recebimento.</span></h2><div class="grid3">
-<div class="card"><span class="num">01</span><h3>Você já vendeu, já entregou, já pagou imposto.</h3><p>E o cliente não pagou. O trabalho foi feito. O custo já saiu do seu caixa. O que falta é o dinheiro voltar.</p></div>
-<div class="card"><span class="num">02</span><h3>Cada dia de atraso, a chance de receber cai.</h3><p>Boleto esquecido hoje vira desculpa amanhã e silêncio depois. Cobrança não pode esperar a sua agenda liberar.</p></div>
-<div class="card"><span class="num">03</span><h3>Sua equipe não tem tempo de ficar cobrando.</h3><p>Financeiro vira SAC, comercial vira cobrador e ninguém faz o que realmente gera receita. Isso custa mais do que parece.</p></div>
-</div><div class="alert"><b>A perda já aconteceu.</b> <span style="color:rgba(255,255,255,.8)">A pergunta é: você vai deixar esse dinheiro parado na conta de outra pessoa — ou vai buscar de volta?</span></div></div></section>
+<main id="main" id="top">
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-in container">
+      <div class="animate-in">
+        <div class="badge" role="status" aria-live="polite">
+          <span>● Piloto 14 dias • Empresas com faturamento recorrente</span>
+          <span>Sem fidelidade • Cancelamento imediato</span>
+        </div>
+        <h1 id="hero-title" class="animate-in delay-1">
+          Seu dinheiro já foi faturado.<span>Está parado na conta de quem te deve.</span>
+        </h1>
+        <p class="lead animate-in delay-2">A CobrançaAI recupera boletos e Pix em atraso por WhatsApp com IA + revisão humana. Você só paga <strong>7% sobre o que entrar de verdade na sua conta.</strong> Se não entrar nada, você paga <strong class="green">R$ 0.</strong></p>
 
-<section style="border-top:1px solid rgba(255,255,255,.06);background:#070d09"><div class="wrap"><div class="benefits"><div><p class="kicker">O que você ganha</p><h2>Recuperação sem briga, sem custo fixo e sem perder o cliente.</h2><p style="color:var(--muted);margin-top:18px">Não é robô soltando mensagem em massa. É processo, revisão humana e controle total da sua empresa sobre cada palavra enviada.</p><div style="margin-top:24px"><a href="#" data-cta class="btn">💬 Quero testar por 14 dias</a></div></div><div>
-<div class="benefit"><span class="icon">✓</span><div><h3>Sem custo fixo</h3><p>Nada de mensalidade, taxa de implantação ou mínimo. No piloto, você só paga sobre o que entrar.</p></div></div>
-<div class="benefit"><span class="icon">✓</span><div><h3>Sem constranger o cliente</h3><p>Tom profissional, claro e respeitoso. A intenção é manter o relacionamento — e receber.</p></div></div>
-<div class="benefit"><span class="icon">✓</span><div><h3>Mensagens dentro do CDC</h3><p>Sem ameaça, sem exposição, sem pressão indevida. Cobrança firme, dentro da lei.</p></div></div>
-<div class="benefit"><span class="icon">✓</span><div><h3>Você aprova tudo antes</h3><p>Nenhuma mensagem sai sem a sua aprovação. Você controla o tom, o texto e o momento.</p></div></div>
-<div class="benefit"><span class="icon">✓</span><div><h3>Relatório com comprovantes</h3><p>Você acompanha o que foi cobrado, o que foi respondido e o que entrou na sua conta.</p></div></div>
-</div></div></div></section>
+        <div class="hero-cta animate-in delay-3">
+          <form class="hero-form" action="https://wa.me/5577999999999" method="GET" target="_blank" rel="noopener" id="hero-form">
+            <input type="hidden" name="text" value="Quero participar do piloto de 14 dias da CobrançaAI com 100 títulos">
+            <div class="form-group">
+              <label for="hero-email" class="sr-only">Seu melhor e-mail corporativo</label>
+              <input type="email" id="hero-email" name="email" placeholder="seu@email.com" required autocomplete="email" aria-label="Seu melhor e-mail corporativo" placeholder="seu@email.com">
+            </div>
+            <button type="submit" class="btn btn-block" aria-label="Quero recuperar meu dinheiro via WhatsApp">💬 Quero recuperar meu dinheiro →</button>
+          </form>
+          <p class="micro">Sem cartão &nbsp;•&nbsp; Sem fidelidade &nbsp;•&nbsp; Resposta em até 1 dia útil &nbsp;•&nbsp; LGPD & CDC compliant</p>
+        </div>
 
-<section><div class="wrap"><div style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:end"><div><p class="kicker">Como funciona</p><h2>Três passos. <span class="muted">Nenhuma burocracia.</span></h2></div><p style="max-width:300px;color:var(--muted);font-size:14px">Você não precisa mudar sistema, treinar equipe ou esperar um projeto de meses.</p></div><div class="grid3">
-<div class="card"><div style="display:flex;justify-content:space-between"><span style="background:rgba(43,255,136,.12);color:var(--neon);padding:10px 14px;border-radius:14px;font-weight:800">📋</span><span style="font-size:44px;font-weight:800;color:rgba(255,255,255,.07)">01</span></div><span style="display:inline-block;margin-top:18px;border:1px solid rgba(43,255,136,.3);background:rgba(43,255,136,.1);color:var(--neon2);padding:4px 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.06em">5 MINUTOS</span><h3 style="margin-top:10px">Você envia a planilha</h3><p>Até 100 títulos em atraso. Simples assim. Sem integração, sem migração, sem TI.</p></div>
-<div class="card"><div style="display:flex;justify-content:space-between"><span style="background:rgba(43,255,136,.12);color:var(--neon);padding:10px 14px;border-radius:14px;font-weight:800">💬</span><span style="font-size:44px;font-weight:800;color:rgba(255,255,255,.07)">02</span></div><span style="display:inline-block;margin-top:18px;border:1px solid rgba(43,255,136,.3);background:rgba(43,255,136,.1);color:var(--neon2);padding:4px 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.06em">IA + HUMANO</span><h3 style="margin-top:10px">A gente cobra por WhatsApp</h3><p>IA + revisão humana. Mensagem certa, no canal que o cliente realmente responde.</p></div>
-<div class="card"><div style="display:flex;justify-content:space-between"><span style="background:rgba(43,255,136,.12);color:var(--neon);padding:10px 14px;border-radius:14px;font-weight:800">💸</span><span style="font-size:44px;font-weight:800;color:rgba(255,255,255,.07)">03</span></div><span style="display:inline-block;margin-top:18px;border:1px solid rgba(43,255,136,.3);background:rgba(43,255,136,.1);color:var(--neon2);padding:4px 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.06em">SÓ SOBRE O QUE ENTROU</span><h3 style="margin-top:10px">Você confere no extrato</h3><p>Entrou na sua conta, você paga 7% sobre o recuperado. Não entrou, você paga R$ 0.</p></div>
-</div></div></section>
+        <div class="checks" role="list" aria-label="Benefícios do piloto">
+          <span role="listitem"><i aria-hidden="true">✓</i> Até 100 títulos no piloto</span>
+          <span role="listitem"><i aria-hidden="true">✓</i> Você aprova cada mensagem</span>
+          <span role="listitem"><i aria-hidden="true">✓</i> Encerre quando quiser, sem multa</span>
+        </div>
+      </div>
 
-<section style="padding-top:0"><div class="wrap"><div class="garantia"><div><span style="background:var(--neon);color:#000;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800">🛡️ GARANTIA DO PILOTO</span><h2 style="margin-top:18px">O risco é nosso, <span>não seu.</span></h2><p style="color:rgba(255,255,255,.75);margin-top:14px">Não tem letra miúda. Não tem taxa para começar. Não tem fidelidade. Se o piloto não fizer sentido para você, você encerra a qualquer momento.</p><p style="margin-top:20px;font-size:14px;font-weight:700">✓ Encerre a qualquer momento — sem multa, sem explicação.</p></div><div><div class="exemplo"><p style="font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--muted)">SE RECUPERARMOS</p><p class="val">R$ 10.000</p><div class="line"><span>Você paga 7%</span><strong>R$ 700</strong></div><div style="display:flex;justify-content:space-between;margin-top:8px;font-size:14px"><span>Fica na sua conta</span><strong>R$ 9.300</strong></div></div><div class="exemplo"><p style="font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--muted)">SE RECUPERARMOS</p><p class="val">R$ 0</p><div class="line"><span>Você paga</span><strong>R$ 0</strong></div></div><p style="text-align:center;font-size:12px;color:rgba(255,255,255,.5)">Exemplo numérico para deixar a regra clara. Sem promessa de resultado.</p></div></div></div></section>
+      <aside class="hero-sidebar animate-in delay-4" aria-label="Exemplo de resultados">
+        <div class="proof-card" role="region" aria-label="Exemplo de recuperação">
+          <div style="display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+            <div><p class="label">Exemplo real de recuperação</p><h3 style="margin-top:4px">Seu dinheiro voltando ao caixa</h3></div>
+            <span style="width:48px;height:48px;background:var(--accent-dim);border-radius:14px;display:grid;place-items:center;font-size:24px" aria-hidden="true">💸</span>
+          </div>
+          <div class="proof-row">
+            <div><b>Pix recebido</b><br><small>Boleto em atraso 12 dias</small></div>
+            <span class="val">+ R$ 4.280</span>
+          </div>
+          <div class="proof-row">
+            <div><b>Pix recebido</b><br><small>Pix em atraso 5 dias</small></div>
+            <span class="val">+ R$ 2.150</span></div>
+          <div class="proof-row" style="border-color:rgba(43,255,136,.3);background:rgba(43,255,136,.06)">
+            <div><b>Cliente respondeu</b><br><small>Negociando parcelamento 2x</small></div>
+            <span class="tag">EM NEGOCIAÇÃO</span></div>
+          <div class="proof-total"><span style="color:var(--text-muted);font-size:14px">Total recuperado no exemplo</span><b>R$ 6.430</b></div>
+          <p class="proof-note">Valores ilustrativos. Seu resultado depende da sua carteira e da régua de cobrança aplicada.</p>
+        </div>
+        <div style="margin-top:16px;display:inline-flex;gap:8px;align-items:center;background:#0a1a11;border:1px solid var(--line);padding:10px 16px;border-radius:var(--radius-pill);font-size:13px;font-weight:700">🛡️ <span style="color:var(--accent)">CDC & LGPD compliant</span> · <span style="color:var(--accent)">Revisão humana</span></div>
+      </aside>
+    </div>
+  </section>
 
-<section id="pricing" class="pricing"><div class="wrap"><div class="center"><p class="kicker">Um único plano. Sem pegadinha.</p><h2>Piloto de 14 dias</h2><p style="color:var(--muted);margin-top:12px">Prove com a sua carteira real, antes de decidir qualquer coisa maior.</p></div><div class="price-card"><div class="price-top"><span>⚡ VAGA DE PILOTO</span><span>Só 3 empresas por mês</span></div><div class="price-body"><div style="display:flex;align-items:end;gap:12px;flex-wrap:wrap"><span class="price-big">7% <small>só sobre<br>o recuperado</small></span></div><p class="price-sub">R$ 0 fixo • R$ 0 para começar • Se não entrar nada, R$ 0.</p><ul class="price-list"><li><i>✓</i> Até 100 títulos em atraso</li><li><i>✓</i> Cobrança por WhatsApp com IA + humano</li><li><i>✓</i> Você aprova todas as mensagens</li><li><i>✓</i> Relatório com comprovantes</li><li><i>✓</i> Mensagens dentro do CDC</li><li><i>✓</i> Encerramento a qualquer momento</li></ul><div style="margin-top:28px"><a href="#" data-cta class="btn" style="width:100%">💬 Quero uma das 3 vagas</a><p style="text-align:center;font-size:13px;color:var(--muted);margin-top:10px">Sem cartão • Sem fidelidade • Resposta em até 1 dia útil</p></div></div></div></div></section>
+  <!-- PROBLEM SECTION -->
+  <section aria-labelledby="problem-title">
+    <div class="wrap">
+      <p class="kicker animate-in">A dor que ninguém vê no DRE</p>
+      <h2 id="problem-title" class="animate-in delay-1">Você não tem problema de venda. <span class="muted">Tem problema de recebimento.</span></h2>
+      <div class="grid3">
+        <div class="card animate-in delay-1"><span class="num">01</span><h3>Você já vendeu, já entregou, já pagou imposto.</h3><p>E o cliente não pagou. O trabalho foi feito. O custo já saiu do seu caixa. O que falta é o dinheiro voltar.</p></div>
+        <div class="card animate-in delay-2"><span class="num">02</span><h3>Cada dia de atraso, a chance de receber cai.</h3><p>Boleto esquecido hoje vira desculpa amanhã e silêncio depois. Cobrança não pode esperar a sua agenda liberar.</p></div>
+        <div class="card animate-in delay-3"><span class="num">03</span><h3>Sua equipe não tem tempo de ficar cobrando.</h3><p>Financeiro vira SAC, comercial vira cobrador e ninguém faz o que realmente gera receita. Isso custa mais do que parece.</p></div>
+      </div>
+      <div class="alert animate-in delay-4" role="alert"><b>A perda já aconteceu.</b> <span style="color:rgba(255,255,255,.8)">A pergunta é: você vai deixar esse dinheiro parado na conta de outra pessoa — ou vai buscar de volta?</span></div>
+    </div>
+  </section>
 
-<section><div class="wrap"><p class="kicker">Para empresa que não pode errar</p><h2>Segurança primeiro. <span class="muted">Burocracia, não.</span></h2><div class="grid3">
-<div class="card"><span style="font-size:28px">🔒</span><h3>LGPD</h3><p>Só pedimos o mínimo necessário para cobrar. Seus dados e os dos seus clientes tratados com o cuidado que uma operação séria exige.</p></div>
-<div class="card"><span style="font-size:28px">⚖️</span><h3>CDC</h3><p>Cobrança firme, sem ameaça, sem exposição e sem pressão indevida. Seu cliente é tratado como cliente — não como problema.</p></div>
-<div class="card"><span style="font-size:28px">📋</span><h3>Sem integração no piloto</h3><p>É planilha. Sem NDA assinado antes de começar, sem TI, sem projeto. Você testa rápido e decide com número na mão.</p></div>
-</div></div></section>
+  <!-- BENEFITS -->
+  <section style="border-top:1px solid var(--line);background:var(--surface)" aria-labelledby="benefits-title">
+    <div class="wrap">
+      <div class="benefits">
+        <div class="animate-in delay-1">
+          <p class="kicker">O que você ganha</p>
+          <h2 id="benefits-title">Recuperação sem briga, sem custo fixo e sem perder o cliente.</h2>
+          <p style="color:var(--text-muted);margin-top:18px;max-width:480px">Não é robô soltando mensagem em massa. É processo, revisão humana e controle total da sua empresa sobre cada palavra enviada.</p>
+          <div style="margin-top:28px"><a href="#piloto" data-cta class="btn btn-block">💬 Iniciar piloto de 14 dias</a></div>
+        </div>
+        <div>
+          <div class="benefit animate-in delay-1"><span class="icon" aria-hidden="true">🛡️</span><div><h3>Zero custo fixo</h3><p>Nada de mensalidade, setup fee ou mínimo. No piloto, você só paga sobre o que entrar de verdade.</p></div></div>
+          <div class="benefit animate-in delay-2"><span class="icon" aria-hidden="true">🤝</span><div><h3>Sem constranger seu cliente</h3><p>Tom profissional, claro e respeitoso. A intenção é manter o relacionamento — e receber.</p></div></div>
+          <div class="benefit animate-in delay-3"><span class="icon" aria-hidden="true">⚖️</span><div><h3>100% dentro do CDC e LGPD</h3><p>Sem ameaça, sem exposição, sem pressão indevida. Cobrança firme, dentro da lei.</p></div></div>
+          <div class="benefit animate-in delay-4"><span class="icon" aria-hidden="true">🎛️</span><div><h3>Você aprova tudo antes</h3><p>Nenhuma mensagem sai sem sua aprovação. Você controla tom, texto, momento e regras.</p></div></div>
+          <div class="benefit animate-in delay-5"><span class="icon" aria-hidden="true">📊</span><div><h3>Relatório com comprovantes</h3><p>Dashboard com o que foi cobrado, respondido, recuperado e conciliado no extrato.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section style="border-top:1px solid rgba(255,255,255,.06);background:#070d09"><div class="wrap"><div class="faq"><div><p class="kicker">Perguntas frequentes</p><h2>Se ainda está em dúvida, leia isso.</h2><p style="color:var(--muted);margin-top:12px">Transparência antes do clique. Se a sua dúvida não estiver aqui, pergunte direto no WhatsApp.</p><a href="#" data-cta style="display:inline-block;margin-top:20px;color:var(--neon);font-weight:700;font-size:14px;text-decoration:none">Perguntar no WhatsApp →</a></div><div>
-<div class="faq-item open"><button class="faq-q" type="button">E se o cliente reclamar? <span class="plus">↓</span></button><div class="faq-a">A cobrança segue o CDC: sem ameaça, sem exposição e sem pressão indevida. O tom é profissional e focado em resolver. E você aprova todas as mensagens antes de qualquer envio.</div></div>
-<div class="faq-item"><button class="faq-q" type="button">Vocês integram com meu ERP? <span class="plus">↓</span></button><div class="faq-a">No piloto, não. É planilha mesmo — de propósito. Você testa o resultado em 14 dias sem envolver TI, sem mudar sistema e sem assinar nada complexo. Se fizer sentido depois, a gente conversa sobre o próximo passo.</div></div>
-<div class="faq-item"><button class="faq-q" type="button">E se não recuperar nada? <span class="plus">↓</span></button><div class="faq-a">Você paga R$ 0. Não há custo fixo, mensalidade ou taxa escondida no piloto. O modelo é simples: só existe comissão quando o dinheiro entra de verdade na sua conta.</div></div>
-<div class="faq-item"><button class="faq-q" type="button">Preciso mandar CPF dos clientes? <span class="plus">↓</span></button><div class="faq-a">Não para começar o piloto. A planilha usa os dados que você já tem para a cobrança — como nome, valor, vencimento e contato. Só pedimos o mínimo necessário e tratamos tudo sob a LGPD.</div></div>
-<div class="faq-item"><button class="faq-q" type="button">Quanto tempo para começar? <span class="plus">↓</span></button><div class="faq-a">Depois da sua aprovação no WhatsApp, você envia a planilha e a gente prepara as mensagens para você aprovar. Resposta em até 1 dia útil. O piloto dura 14 dias a partir do início da cobrança.</div></div>
-</div></div></div></section>
+  <!-- HOW IT WORKS -->
+  <section aria-labelledby="how-title">
+    <div class="wrap">
+      <div style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:end;margin-bottom:32px">
+        <div><p class="kicker">Como funciona</p><h2 id="how-title">Três passos. <span class="muted">Zero burocracia.</span></h2></div>
+        <p style="max-width:340px;color:var(--text-muted);font-size:14px">Sem integração, sem TI, sem contrato de fidelidade. Você testa com a sua carteira real.</p>
+      </div>
+      <div class="grid3">
+        <div class="card animate-in delay-1">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+            <span style="background:var(--accent-dim);color:var(--accent);padding:12px 16px;border-radius:14px;font-weight:800;font-size:18px" aria-hidden="true">📋</span>
+            <span style="font-size:48px;font-weight:800;color:rgba(255,255,255,.04)">01</span>
+          </div>
+          <span style="display:inline-block;margin-top:18px;border:1px solid rgba(43,255,136,.3);background:var(--accent-dim);color:var(--accent);padding:6px 12px;border-radius:var(--radius-pill);font-size:12px;font-weight:800;letter-spacing:.06em">5 MINUTOS</span>
+          <h3 style="margin-top:12px">Você envia a planilha</h3>
+          <p>Até 100 títulos em atraso. CSV, Excel ou Google Sheets. Sem integração, sem TI, sem migração.</p>
+        </div>
+        <div class="card animate-in delay-2">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+            <span style="background:var(--accent-dim);color:var(--accent);padding:12px 16px;border-radius:14px;font-weight:800;font-size:18px" aria-hidden="true">🤖</span>
+            <span style="font-size:48px;font-weight:800;color:rgba(255,255,255,.04)">02</span>
+          </div>
+          <span style="display:inline-block;margin-top:18px;border:1px solid rgba(43,255,136,.3);background:var(--accent-dim);color:var(--accent);padding:6px 12px;border-radius:var(--radius-pill);font-size:11px;font-weight:800;letter-spacing:.06em">IA + HUMANO</span>
+          <h3 style="margin-top:12px">A gente cobra por WhatsApp</h3>
+          <p>IA redige, humano revisa. Mensagem certa, no canal que o cliente abre. Você aprova antes do envio.</p>
+        </div>
+        <div class="card animate-in delay-3">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+            <span style="background:var(--accent-dim);color:var(--accent);padding:12px 16px;border-radius:14px;font-weight:800;font-size:18px" aria-hidden="true">💰</span>
+            <span style="font-size:48px;font-weight:800;color:rgba(255,255,255,.04)">03</span>
+          </div>
+          <span style="display:inline-block;margin-top:18px;border:1px solid rgba(43,255,136,.3);background:var(--accent-dim);color:var(--accent);padding:6px 12px;border-radius:var(--radius-pill);font-size:11px;font-weight:800;letter-spacing:.06em">SÓ SOBRE O QUE ENTROU</span>
+          <h3 style="margin-top:12px">Você confere no extrato</h3>
+          <p>Entrou na sua conta, você paga 7% sobre o recuperado. Não entrou, você paga R$ 0. Simples assim.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section id="piloto" class="final"><div class="wrap"><span style="border:1px solid rgba(43,255,136,.4);background:rgba(43,255,136,.1);color:var(--neon2);padding:8px 16px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.12em">⏰ SÓ 3 VAGAS DE PILOTO POR MÊS</span><h2 style="margin-top:22px">Quando fechar, <span>só mês que vem.</span></h2><p>Enquanto isso, seu dinheiro continua parado na conta de quem te deve. Peça o piloto agora e veja sua carteira sendo cobrada nos próximos 14 dias.</p><div class="cta"><a href="#" data-cta class="btn" style="width:100%">💬 Quero recuperar meu dinheiro</a><p style="font-size:13px;font-weight:600;color:var(--muted);margin-top:10px">Sem cartão • Sem fidelidade • Resposta em até 1 dia útil</p></div><div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:28px;font-size:12px;font-weight:700;color:rgba(255,255,255,.6)"><span>✓ Você aprova tudo antes</span><span>✓ Dentro do CDC</span><span>✓ Se não entrar, R$ 0</span></div></div></section>
-</main>
+  <!-- GARANTIA -->
+  <section style="padding-top:0" aria-labelledby="garantia-title">
+    <div class="wrap">
+      <div class="garantia" role="region" aria-labelledby="garantia-title">
+        <div>
+          <span style="background:var(--accent);color:#03130a;padding:8px 16px;border-radius:var(--radius-pill);font-size:13px;font-weight:800;display:inline-block;margin-bottom:16px">🛡️ GARANTIA DO PILOTO</span>
+          <h2 id="garantia-title" style="margin-top:18px">O risco é nosso, <span>não seu.</span></h2>
+          <p style="color:rgba(255,255,255,.8);margin-top:16px;line-height:1.7">Não tem letra miúda. Não tem taxa para começar. Não tem fidelidade. Se o piloto não fizer sentido para você, você encerra a qualquer momento — sem multa, sem justificativa, sem ressentimento.</p>
+          <p style="margin-top:24px;font-size:15px;font-weight:700;color:var(--accent)">✓ Encerre a qualquer momento — sem multa, sem explicação, sem burocracia.</p>
+        </div>
+        <div>
+          <div class="exemplo">
+            <p style="font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--text-muted);margin-bottom:8px">SE RECUPERARMOS</p>
+            <p class="val">R$ 10.000</p>
+            <div class="line"><span>Você paga 7%</span><strong>R$ 700</strong></div>
+            <div style="display:flex;justify-content:space-between;margin-top:10px;font-size:15px"><span>Fica na sua conta</span><strong>R$ 9.300</strong></div>
+          </div>
+          <div class="exemplo">
+            <p style="font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--text-muted);margin-bottom:8px">SE RECUPERARMOS</p>
+            <p class="val">R$ 0</p>
+            <div class="line"><span>Você paga</span><strong>R$ 0</strong></div>
+          </div>
+          <p style="text-align:center;font-size:12px;color:rgba(255,255,255,.5);margin-top:16px">Exemplo numérico para deixar a regra clara. Sem promessa de resultado garantido.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<footer><div class="footer-in"><a class="logo" href="#top" data-cta><span class="logo-mark">R$</span><span class="logo-txt" style="font-size:16px">Cobrança<span style="color:var(--neon)">AI</span></span></a><p>Cobrança de títulos em atraso por WhatsApp, com IA + revisão humana. Piloto de 14 dias. 7% apenas sobre o valor recuperado.</p><a href="#pricing" style="font-size:12px;font-weight:700;color:rgba(255,255,255,.7);text-decoration:none">Ver piloto →</a></div></footer>
+  <!-- PRICING -->
+  <section id="pricing" class="pricing" aria-labelledby="pricing-title">
+    <div class="wrap">
+      <div class="center animate-in delay-1">
+        <p class="kicker">Um único plano. Sem pegadinha.</p>
+        <h2 id="pricing-title">Piloto de 14 dias</h2>
+        <p style="color:var(--text-muted);margin-top:12px;max-width:600px;margin-left:auto;margin-right:auto">Prove com a sua carteira real. Se não recuperar, não paga. Simples assim.</p>
+      </div>
+      <div class="price-card animate-in delay-2">
+        <div class="price-top"><span>⚡ VAGA DE PILOTO</span><span>Só 3 empresas por mês</span></div>
+        <div class="price-body">
+          <div style="display:flex;align-items:end;gap:12px;flex-wrap:wrap;justify-content:center">
+            <span class="price-big">7% <small>só sobre<br>o recuperado</small></span>
+          </div>
+          <p class="price-sub">R$ 0 fixo • R$ 0 para começar • Se não entrar nada, R$ 0.</p>
+          <ul class="price-list" role="list">
+            <li><i aria-hidden="true">✓</i> Até 100 títulos em atraso no piloto</li>
+            <li><i aria-hidden="true">✓</i> Cobrança por WhatsApp com IA + revisão humana</li>
+            <li><i aria-hidden="true">✓</i> Você aprova TODAS as mensagens antes do envio</li>
+            <li><i aria-hidden="true">✓</i> Relatório final com comprovantes Pix anexados</li>
+            <li><i aria-hidden="true">✓</i> Mensagens 100% dentro do CDC e LGPD</li>
+            <li><i aria-hidden="true">✓</i> Encerramento a qualquer momento, sem multa</li>
+          </ul>
+          <div style="margin-top:36px">
+            <a href="https://wa.me/5577999999999?text=Quero%20participar%20do%20piloto%20de%2014%20dias%20da%20Cobran%C3%A7aAI%20com%20100%20t%C3%ADtulos" class="btn btn-block" target="_blank" rel="noopener" aria-label="Solicitar piloto de 14 dias via WhatsApp">💬 Quero uma das 3 vagas deste mês</a>
+            <p style="text-align:center;font-size:13px;color:var(--text-muted);margin-top:14px">Sem cartão • Sem fidelidade • Resposta em até 1 dia útil • NDA + Termo LGPD antes de começar</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<a href="#" data-cta class="float">💬 <span>Pedir piloto no WhatsApp</span></a>
+  <!-- SECURITY -->
+  <section aria-labelledby="security-title">
+    <div class="wrap">
+      <p class="kicker animate-in">Para empresa que não pode errar</p>
+      <h2 id="security-title" class="animate-in">Segurança primeiro. <span class="muted">Burocracia, não.</span></h2>
+      <div class="grid3">
+        <div class="card animate-in delay-1"><span style="font-size:32px" aria-hidden="true">🔒</span><h3>LGPD Nativa</h3><p>Só pedimos o mínimo: nome, telefone, valor, vencimento. Dados criptografados, não compartilhados, excluídos pós-piloto se solicitado.</p></div>
+        <div class="card animate-in delay-2"><span style="font-size:32px" aria-hidden="true">⚖️</span><h3>CDC Compliant</h3><p>Cobrança firme mas respeitosa. Sem ameaça, exposição ou pressão indevida. Seu cliente é tratado como cliente — não como devedor.</p></div>
+        <div class="card animate-in delay-3"><span style="font-size:32px" aria-hidden="true">📋</span><h3>Zero Integração no Piloto</h3><p>É planilha (CSV/Excel/Google Sheets). Sem API, sem dev, sem NDA complexo. Você testa o resultado em 14 dias, decide depois.</p></div>
+      </div>
+    </div>
+  </section>
 
-<script>
-// ============================================================
-// ÚNICO LINK - TROQUE AQUI E TODOS OS BOTÕES MUDAM JUNTOS
-// ============================================================
-const LINK = "https://wa.me/5577999999999?text=Quero%20participar%20do%20piloto%20de%2014%20dias%20da%20Cobran%C3%A7aAI";
+  <!-- FAQ -->
+  <section id="faq" style="border-top:1px solid var(--line);background:var(--surface)" aria-labelledby="faq-title">
+    <div class="wrap">
+      <div class="faq" role="region" aria-labelledby="faq-title">
+        <div class="animate-in delay-1">
+          <p class="kicker">Perguntas frequentes</p>
+          <h2 id="faq-title">Se ainda está em dúvida, leia isso.</h2>
+          <p style="color:var(--text-muted);margin-top:12px;max-width:600px">Transparência total antes do clique. Sua dúvida não está aqui? Chama no WhatsApp.</p>
+          <a href="https://wa.me/5577999999999?text=Tenho%20uma%20d%C3%BAvida%20sobre%20o%20piloto%20da%20Cobran%C3%A7aAI" class="btn btn-ghost" style="display:inline-block;margin-top:24px" target="_blank" rel="noopener">💬 Perguntar no WhatsApp →</a>
+        </div>
+        <div>
+          <div class="faq-item open">
+            <button class="faq-q" type="button" aria-expanded="true" aria-controls="faq1">E se o cliente reclamar ou se sentir constrangido? <span class="plus" aria-hidden="true">↓</span></button>
+            <div id="faq1" class="faq-a" role="region" aria-hidden="false">A cobrança segue CDC Art. 42/71: sem ameaça, sem exposição, sem pressão indevida, intervalo mínimo de 48h. Tom profissional focado em resolver. Você aprova TODAS as mensagens antes de qualquer envio. Se o cliente pedir para parar, paramos na hora.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq2">Vocês integram com meu ERP/Asaas/Conta Azul? <span class="plus">↓</span></button>
+            <div id="faq2" class="faq-a">No piloto, não. É planilha (CSV/Excel/Google Sheets) — de propósito. Você testa o resultado em 14 dias sem envolver TI, sem mudar sistema, sem assinar contrato complexo. Se fizer sentido depois, a gente conversa sobre integração via API (Asaas, Omie, Conta Azul, Bling, etc).</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq3">E se não recuperar nada no piloto? <span class="plus">↓</span></button>
+            <div id="faq3" class="faq-a">Você paga R$ 0. Não há custo fixo, mensalidade, setup fee ou taxa escondida. O modelo é simples: só existe comissão (7%) quando o dinheiro entra de verdade na sua conta, comprovado por extrato.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq4">Preciso mandar CPF/CNPJ dos clientes? <span class="plus">↓</span></button>
+            <div id="faq4" class="faq-a">Não para o piloto. A planilha usa: nome, telefone/WhatsApp, valor, vencimento, nº do boleto/NF, descrição. Só o mínimo para cobrar. Dados sensíveis (CPF) só se você quiser e autorizar — e só para conciliação bancária.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq5">E se o cliente disser "já paguei" ou "não devo"? <span class="plus">↓</span></button>
+            <div id="faq5" class="faq-a">O Claude para imediatamente. Marca como [REVISÃO HUMANA URGENTE] e te avisa. Você decide o que fazer. O sistema NUNCA discute com cliente — isso é regra dura no código.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq6">Quanto tempo para começar o piloto? <span class="plus">↓</span></button>
+            <div id="faq6" class="faq-a">Depois da sua aprovação no WhatsApp, você envia a planilha e a gente prepara as mensagens para você aprovar. Resposta em até 1 dia útil. O piloto dura 14 dias corridos a partir do primeiro disparo.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-// Aplica o link em todos os botões com data-cta
-document.querySelectorAll('a[data-cta]').forEach(function(a){
-  a.href = LINK;
-  a.target = "_blank";
-  a.rel = "noopener";
-});
+  <!-- FINAL CTA -->
+  <section id="piloto" class="final" aria-labelledby="final-title">
+    <div class="wrap">
+      <span style="border:1px solid rgba(43,255,136,.4);background:rgba(43,255,136,.1);color:#4dffa6;padding:10px 20px;border-radius:var(--radius-pill);font-size:13px;font-weight:800;letter-spacing:.1em;display:inline-block;margin-bottom:24px;animation:pulse 2s ease-in-out infinite">⏰ SÓ 3 VAGAS DE PILOTO PARA MAIO</span>
+      <h2 id="final-title" class="animate-in">Quando fechar, <span>só mês que vem.</span></h2>
+      <p class="animate-in delay-1" style="max-width:600px;margin:16px auto 0">Enquanto você lê isso, seu dinheiro continua parado na conta de quem te deve. Peça o piloto agora e veja sua carteira sendo cobrada profissionalmente nos próximos 14 dias.</p>
+      <div class="cta animate-in delay-2" style="max-width:560px;margin:36px auto 0">
+        <a href="https://wa.me/5577999999999?text=Quero%20participar%20do%20piloto%20de%2014%20dias%20da%20Cobran%C3%A7aAI%20com%20100%20t%C3%ADtulos" class="btn btn-block" target="_blank" rel="noopener" aria-label="Solicitar piloto de 14 dias via WhatsApp">💬 Quero recuperar meu dinheiro</a>
+        <p style="font-size:13px;font-weight:600;color:var(--text-muted);margin-top:14px;text-align:center">Sem cartão • Sem fidelidade • Resposta em até 1 dia útil • NDA + LGPD antes de começar</p>
+      </div>
+      <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:32px;font-size:12px;font-weight:700;color:rgba(255,255,255,.5)">
+        <span>✓ Você aprova tudo antes</span><span>✓ 100% CDC & LGPD</span><span>✓ Se não entrar, R$ 0</span>
+      </div>
+    </div>
+  </section>
+  </main>
 
-// FAQ accordion
-document.querySelectorAll('.faq-q').forEach(function(btn){
-  btn.addEventListener('click', function(){
-    var item = btn.parentElement;
-    var wasOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
-    if(!wasOpen) item.classList.add('open');
+  <footer role="contentinfo">
+    <div class="footer-in container">
+      <a class="logo" href="#top" data-cta aria-label="CobrançaAI - Voltar ao topo"><span class="logo-mark" aria-hidden="true">R$</span><span class="logo-txt" style="font-size:16px">Cobrança<span style="color:var(--accent)">AI</span></span></a>
+      <p style="max-width:480px">Cobrança de títulos em atraso por WhatsApp, com IA + revisão humana. Piloto de 14 dias. 7% apenas sobre o valor recuperado. R$ 0 fixo.</p>
+      <a href="#piloto" class="footer-link">Iniciar piloto →</a>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5577999999999?text=Quero%20participar%20do%20piloto%20de%2014%20dias%20da%20Cobran%C3%A7aAI%20com%20100%20t%C3%ADtulos" class="float-cta" target="_blank" rel="noopener" aria-label="Pedir piloto no WhatsApp">
+    <span aria-hidden="true">💬</span> Pedir piloto no WhatsApp
+  </a>
+
+  <script>
+  // ============================================================
+  // SINGLE LINK VARIABLE - CHANGE HERE, ALL BUTTONS UPDATE
+  // ============================================================
+  const LINK = "https://wa.me/5577999999999?text=Quero%20participar%20do%20piloto%20de%2014%20dias%20da%20Cobran%C3%A7aAI%20com%20100%20t%C3%ADtulos";
+
+  // Apply to all data-cta links
+  document.querySelectorAll('a[data-cta]').forEach(function(a){
+    a.href = LINK;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
   });
-});
-</script>
-<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);})();</script></body>
+
+  // FAQ Accordion - Acessível
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.parentElement;
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); i.querySelector('.faq-q').setAttribute('aria-expanded', 'false'); i.querySelector('.faq-a').setAttribute('aria-hidden', 'true'); });
+      if(!wasOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        item.querySelector('.faq-a').setAttribute('aria-hidden', 'false');
+      }
+    });
+    // Keyboard support
+    btn.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); btn.click(); }
+    });
+  });
+
+  // Intersection Observer para animações
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('animate-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.animate-in').forEach(function(el){ observer.observe(el); });
+  }
+
+  // Smooth scroll para links internos
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var target = document.querySelector(this.getAttribute('href'));
+      if(target){ e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); target.focus({ preventScroll: true }); }
+    });
+  });
+  </script>
+</body>
 </html>
